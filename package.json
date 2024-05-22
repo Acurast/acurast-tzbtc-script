@@ -1,0 +1,24 @@
+{
+  "name": "acurast-tzbtc-script",
+  "version": "0.0.1",
+  "author": "Alessandro De Carli <alessandro@acurast.com>, Andreas Gassmann <andreas@acurast.com>",
+  "main": "index.min.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "bundle": "npm run build && webpack --mode=development --config webpack.config.js --entry=./dist/index.js --output-path ./ && terser --ecma=12 ./main.js -o ./index.min.js && npm run prepend",
+    "prepend": "echo 'const self = {};' > temp.js && cat index.min.js >> temp.js && mv temp.js index.min.js"
+  },
+  "dependencies": {
+    "buffer": "^6.0.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.17",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  }
+}
